@@ -20,5 +20,48 @@ patientType::patientType(string id = "", string fName = "",             // may h
                          string lName = "", int bDay = 1, int bMth = 1,
                          int bYear = 1910, string docFrName = "",
                          string docLaName = "", string docSpl = ""){
+    
+}
 
+void patientType::setInfo(string id = "", string fName = "",             // may have to get rid of the defaults for this
+                         string lName = "", int bDay = 1, int bMth = 1,
+                         int bYear = 1910, string docFrName = "",
+                         string docLaName = "", string docSpl = ""){
+    
+}
+
+void patientType::setID(string id = ""){
+    if(checkPatientID(id)){
+        ID = id;
+        return;
+    }
+    ID = id;
+    cout << "Error: " << ID << " is invalid patientID for " << getFirstName();
+}
+
+void patientType::setBirthDate(int bDay = 1, int bMth = 1, int bYear = 1910){
+    dateOfBirth.setDate(bMth, bDay, bYear);
+    if(bMth < 1 || bMth > 12){
+        cout << "Error: Invalid month entry for " << getFirstName();
+    }
+    if(bYear < 1910 || bYear > 2022){
+        cout << "Error: Invalid year entry for " << getFirstName();
+    }
+}
+
+bool patientType::checkPatientID(string patientIDTmp) const{
+    if(patientIDTmp.size() != 6){
+        return 0;
+    }
+    else if(!isupper(patientIDTmp[0])){
+        return 0;
+    }
+
+    for(int i = 1; i < patientIDTmp.size(); i++){
+        if(!isdigit(patientIDTmp[i])){
+            return 0;
+        }
+    }
+
+    return 1;
 }
